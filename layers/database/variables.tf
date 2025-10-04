@@ -17,9 +17,15 @@ variable "project_name" {
   type        = string
 }
 
+variable "db_identifier" {
+  description = "Database identifier"
+  type        = string
+}
+
 variable "db_engine" {
   description = "Database engine"
   type        = string
+  default     = "postgres"
 }
 
 variable "db_engine_version" {
@@ -50,34 +56,31 @@ variable "db_name" {
 variable "db_username" {
   description = "Master username"
   type        = string
+  default     = "dbadmin"
 }
 
 variable "db_multi_az" {
-  description = "Enable Multi-AZ deployment"
+  description = "Enable Multi-AZ"
   type        = bool
 }
 
-variable "db_backup_retention" {
-  description = "Backup retention period in days"
+variable "backup_retention_period" {
+  description = "Backup retention in days"
   type        = number
 }
 
-variable "db_deletion_protection" {
+variable "deletion_protection" {
   description = "Enable deletion protection"
   type        = bool
 }
 
-variable "db_skip_final_snapshot" {
-  description = "Skip final snapshot on deletion"
+variable "skip_final_snapshot" {
+  description = "Skip final snapshot"
   type        = bool
 }
 
-variable "db_enabled_logs" {
-  description = "List of log types to export"
+variable "enabled_cloudwatch_logs_exports" {
+  description = "CloudWatch log types to export"
   type        = list(string)
-}
-
-variable "db_monitoring_interval" {
-  description = "Enhanced monitoring interval"
-  type        = number
+  default     = []
 }

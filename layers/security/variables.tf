@@ -1,24 +1,5 @@
-/**
- * Security Layer - Variables
- */
-
-variable "environment" {
-  description = "Environment name"
-  type        = string
-}
-
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-}
-
-variable "project_name" {
-  description = "Project name"
-  type        = string
-}
-
-variable "kms_deletion_window" {
-  description = "KMS key deletion window in days"
-  type        = number
-  default     = 30
-}
+variable "environment" { type = string }
+variable "aws_region" { type = string }
+variable "project_name" { type = string }
+variable "ec2_managed_policies" { type = list(string); default = ["arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"] }
+variable "lambda_managed_policies" { type = list(string); default = ["arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"] }

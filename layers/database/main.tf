@@ -1,5 +1,7 @@
 /**
  * Database Layer - Main Configuration
+ * 
+ * Deploys RDS database instances with encryption and backups.
  */
 
 terraform {
@@ -41,7 +43,7 @@ module "app_database" {
   source = "../../modules/rds"
   
   environment = var.environment
-  identifier  = "appdb"
+  identifier  = var.db_identifier
   
   vpc_id     = data.terraform_remote_state.networking.outputs.vpc_id
   subnet_ids = data.terraform_remote_state.networking.outputs.private_subnet_ids
@@ -56,17 +58,15 @@ module "app_database" {
   
   database_name   = var.db_name
   master_username = var.db_username
-  master_password = ""  # Auto-generated
+  master_password = "" # Auto-generated
   
-  multi_az                = var.db_multi_az
-  backup_retention_period = var.db_backup_retention
-  deletion_protection     = var.db_deletion_protection
-  skip_final_snapshot     = var.db_skip_final_snapshot
+  multi_az                 = var.db_multi_az
+  backup_retention_period  = var.backup_retention_period
+  deletion_protection      = var.deletion_protection
+  skip_final_snapshot      = var.skip_final_snapshot
   
-  enabled_cloudwatch_logs_exports = var.db_enabled_logs
-  monitoring_interval             = var.db_monitoring_interval
-  
-  store_password_in_secrets_manager = true
+  enabled_cloudwatch_logs_exports       = var.enabled_cloudwatch_logs_exports
+  store_password_in_secrets_manager     = true
   
   tags = local.common_tags
 }

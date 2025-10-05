@@ -1,3 +1,7 @@
+/**
+ * Storage Layer - Local Values
+ */
+
 locals {
   common_tags = {
     Environment = var.environment

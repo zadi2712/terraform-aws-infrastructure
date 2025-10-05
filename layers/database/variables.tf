@@ -48,6 +48,12 @@ variable "db_max_allocated_storage" {
   type        = number
 }
 
+variable "db_storage_encrypted" {
+  description = "Enable storage encryption"
+  type        = bool
+  default     = true
+}
+
 variable "db_name" {
   description = "Database name"
   type        = string
@@ -60,27 +66,33 @@ variable "db_username" {
 }
 
 variable "db_multi_az" {
-  description = "Enable Multi-AZ"
+  description = "Enable Multi-AZ deployment"
   type        = bool
 }
 
-variable "backup_retention_period" {
-  description = "Backup retention in days"
+variable "db_backup_retention_period" {
+  description = "Backup retention period in days"
   type        = number
 }
 
-variable "deletion_protection" {
+variable "db_deletion_protection" {
   description = "Enable deletion protection"
   type        = bool
 }
 
-variable "skip_final_snapshot" {
-  description = "Skip final snapshot"
+variable "db_skip_final_snapshot" {
+  description = "Skip final snapshot on deletion"
   type        = bool
 }
 
-variable "enabled_cloudwatch_logs_exports" {
-  description = "CloudWatch log types to export"
+variable "db_enabled_cloudwatch_logs" {
+  description = "List of log types to export to CloudWatch"
   type        = list(string)
   default     = []
+}
+
+variable "db_monitoring_interval" {
+  description = "Enhanced monitoring interval"
+  type        = number
+  default     = 0
 }

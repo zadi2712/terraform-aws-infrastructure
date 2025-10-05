@@ -45,3 +45,5 @@ terraform.rc
 
 # Log files
 *.log
+# Ignore infracost output files
+*.infracost
